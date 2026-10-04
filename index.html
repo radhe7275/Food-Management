@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodGo - Food Delivery</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+     <!-- AUTH SECTION -->
+
+<div id="authSection" class="auth-section">
+
+    <!-- LOGIN -->
+
+    <div id="loginBox" class="auth-box">
+
+        <div class="auth-logo">🍔</div>
+
+        <h1>FoodGo</h1>
+
+        <p class="auth-subtitle">
+            Delicious food delivered to you
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter password"
+                    required
+                >
+            </div>
+
+            <button class="main-btn">
+                🔐 Login
+            </button>
+
+        </form>
+
+        <p class="auth-switch">
+            Don't have an account?
+            <span onclick="showSignup()">Signup</span>
+        </p>
+
+        <div class="demo-login">
+            Demo Login:<br>
+            <b>admin@gmail.com</b><br>
+            <b>admin123</b>
+        </div>
+
+    </div>
+
+
+    <!-- SIGNUP -->
+
+    <div id="signupBox" class="auth-box hidden">
+
+        <div class="auth-logo">🍕</div>
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Join FoodGo today
+        </p>
+
+        <form id="signupForm">
+
+            <div class="input-group">
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    id="signupName"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Phone</label>
+
+                <input
+                    type="tel"
+                    id="signupPhone"
+                    placeholder="Enter phone number"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create password"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Confirm Password</label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    required
+                >
+            </div>
+
+            <button class="main-btn">
+                📝 Create Account
+            </button>
+
+        </form>
+
+        <p class="auth-switch">
+            Already have an account?
+            <span onclick="showLogin()">Login</span>
+        </p>
+
+    </div>
+
+</div>
+
+
+     <!-- MAIN APPLICATION -->
+
+<div id="app" class="hidden">
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🍔 <span>FoodGo</span>
+        </div>
+
+        <div class="search-container">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="globalSearch"
+                placeholder="Search food or restaurant..."
+                oninput="globalSearch()"
+            >
+
+        </div>
+
+        <div class="nav-actions">
+
+            <button onclick="showPage('home')">
+                🏠
+            </button>
+
+            <button onclick="showPage('orders')">
+                📋
+            </button>
+
+            <button onclick="showPage('profile')">
+                👤
+            </button>
+
+            <button
+                class="cart-button"
+                onclick="showPage('cart')"
+            >
+                🛒
+
+                <span id="cartCount">
+                    0
+                </span>
+
+            </button>
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                🚪
+            </button>
+
+        </div>
+
+    </header>
+
+
+   <!-- HOME -->
+
+    <main id="home" class="page">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="hero-tag">
+                    🍴 Hungry?
+                </span>
+
+                <h1>
+                    Delicious food
+                    <br>
+                    <span>at your doorstep.</span>
+                </h1>
+
+                <p>
+                    Order your favourite meals from
+                    the best restaurants around you.
+                </p>
+
+                <button
+                    class="hero-btn"
+                    onclick="document.getElementById('foodSection').scrollIntoView()"
+                >
+                    Order Now 🍔
+                </button>
+
+            </div>
+
+            <div class="hero-food">
+                🍕
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORIES -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Food Categories</h2>
+                    <p>Choose what you are craving</p>
+                </div>
+
+            </div>
+
+
+            <div class="categories">
+
+                <button onclick="filterCategory('All')">
+                    <span>🍽️</span>
+                    All
+                </button>
+
+                <button onclick="filterCategory('Pizza')">
+                    <span>🍕</span>
+                    Pizza
+                </button>
+
+                <button onclick="filterCategory('Burger')">
+                    <span>🍔</span>
+                    Burger
+                </button>
+
+                <button onclick="filterCategory('Biryani')">
+                    <span>🍛</span>
+                    Biryani
+                </button>
+
+                <button onclick="filterCategory('Chinese')">
+                    <span>🍜</span>
+                    Chinese
+                </button>
+
+                <button onclick="filterCategory('Dessert')">
+                    <span>🍰</span>
+                    Dessert
+                </button>
+
+                <button onclick="filterCategory('Drinks')">
+                    <span>🥤</span>
+                    Drinks
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESTAURANTS -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>🏪 Popular Restaurants</h2>
+                    <p>Order from your favourite places</p>
+                </div>
+
+            </div>
+
+
+            <div id="restaurantList" class="restaurant-grid"></div>
+
+        </section>
+
+
+        <!-- FOOD -->
+
+        <section
+            class="section"
+            id="foodSection"
+        >
+
+            <div class="section-title">
+
+                <div>
+                    <h2>🍕 Popular Food</h2>
+                    <p>Fresh and delicious food</p>
+                </div>
+
+                <span id="foodResultCount"></span>
+
+            </div>
+
+
+            <div
+                id="foodList"
+                class="food-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+  <!-- CART -->
+
+    <main id="cart" class="page hidden">
+
+        <div class="page-heading">
+
+            <h1>🛒 Your Cart</h1>
+
+            <p>
+                Review your items before placing order.
+            </p>
+
+        </div>
+
+
+        <div class="cart-layout">
+
+            <div
+                id="cartItems"
+                class="cart-items"
+            ></div>
+
+
+            <div class="summary-card">
+
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong id="subtotal">₹0</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery Fee</span>
+                    <strong id="deliveryFee">₹40</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <strong id="tax">₹0</strong>
+                </div>
+
+                <hr>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="grandTotal">₹0</strong>
+                </div>
+
+                <button
+                    class="main-btn"
+                    onclick="goToCheckout()"
+                >
+                    Proceed to Checkout →
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+  <!-- CHECHOUT -->
+
+    <main id="checkout" class="page hidden">
+
+        <div class="page-heading">
+
+            <h1>📍 Checkout</h1>
+
+            <p>
+                Enter delivery details.
+            </p>
+
+        </div>
+
+
+        <div class="checkout-layout">
+
+            <div class="form-card">
+
+                <h2>Delivery Address</h2>
+
+                <form id="addressForm">
+
+                    <div class="input-group">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            id="deliveryName"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Phone</label>
+
+                        <input
+                            type="tel"
+                            id="deliveryPhone"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Address</label>
+
+                        <textarea
+                            id="deliveryAddress"
+                            rows="4"
+                            placeholder="House no, street, area..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="address-grid">
+
+                        <div class="input-group">
+
+                            <label>City</label>
+
+                            <input
+                                type="text"
+                                id="deliveryCity"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>PIN Code</label>
+
+                            <input
+                                type="text"
+                                id="deliveryPin"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="main-btn"
+                    >
+                        Continue to Payment →
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+   <!-- PAYMENT -->
+
+    <main id="payment" class="page hidden">
+
+        <div class="page-heading">
+
+            <h1>💳 Payment</h1>
+
+            <p>
+                Demo payment page
+            </p>
+
+        </div>
+
+
+        <div class="payment-layout">
+
+            <div class="payment-card">
+
+                <h2>Select Payment Method</h2>
+
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="UPI"
+                        checked
+                    >
+
+                    <span>📱</span>
+
+                    <div>
+                        <strong>UPI</strong>
+                        <small>Google Pay / PhonePe / Paytm</small>
+                    </div>
+
+                </label>
+
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="Card"
+                    >
+
+                    <span>💳</span>
+
+                    <div>
+                        <strong>Card</strong>
+                        <small>Credit / Debit Card</small>
+                    </div>
+
+                </label>
+
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="COD"
+                    >
+
+                    <span>💵</span>
+
+                    <div>
+                        <strong>Cash on Delivery</strong>
+                        <small>Pay when your food arrives</small>
+                    </div>
+
+                </label>
+
+
+                <button
+                    class="main-btn"
+                    onclick="placeOrder()"
+                >
+                    📦 Place Order
+                </button>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h2>Order Total</h2>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="paymentTotal">₹0</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+<!-- ORDER -->
+
+    <main id="orders" class="page hidden">
+
+        <div class="page-heading">
+
+            <h1>📋 My Orders</h1>
+
+            <p>
+                Track your previous orders.
+            </p>
+
+        </div>
+
+
+        <div id="ordersList"></div>
+
+    </main>
+
+
+   <!-- PROFILE -->
+
+    <main id="profile" class="page hidden">
+
+        <div class="page-heading">
+
+            <h1>👤 My Profile</h1>
+
+            <p>
+                Manage your account.
+            </p>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+            <h2 id="profileName">
+                User
+            </h2>
+
+            <p id="profileEmail">
+                user@email.com
+            </p>
+
+
+            <div class="profile-info">
+
+                <div>
+                    <span>Name</span>
+                    <strong id="profileName2"></strong>
+                </div>
+
+                <div>
+                    <span>Email</span>
+                    <strong id="profileEmail2"></strong>
+                </div>
+
+                <div>
+                    <span>Phone</span>
+                    <strong id="profilePhone"></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+   <!-- TRACKING -->
+
+    <main id="tracking" class="page hidden">
+
+        <div class="page-heading">
+
+            <h1>🚚 Track Order</h1>
+
+            <p>
+                Follow your food delivery.
+            </p>
+
+        </div>
+
+
+        <div class="tracking-card">
+
+            <div class="tracking-header">
+
+                <div>
+                    <span>Order ID</span>
+                    <h2 id="trackingOrderId">
+                        #000000
+                    </h2>
+                </div>
+
+                <span
+                    class="order-status"
+                    id="trackingStatus"
+                >
+                    Preparing
+                </span>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div class="progress-step active">
+                    <div>✓</div>
+                    <span>Order Placed</span>
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div
+                    class="progress-step"
+                    id="preparingStep"
+                >
+                    <div>🍳</div>
+                    <span>Preparing</span>
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div
+                    class="progress-step"
+                    id="deliveryStep"
+                >
+                    <div>🛵</div>
+                    <span>On the Way</span>
+                </div>
+
+                <div class="progress-line"></div>
+
+                <div
+                    class="progress-step"
+                    id="deliveredStep"
+                >
+                    <div>🏠</div>
+                    <span>Delivered</span>
+                </div>
+
+            </div>
+
+
+            <div class="tracking-message">
+                🍔 Your delicious food is on its way!
+            </div>
+
+        </div>
+
+    </main>
+
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
